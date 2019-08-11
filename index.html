@@ -70,6 +70,19 @@
             /* text-anchor: middle; */
         }
 
+        .data-select * {
+            display: inline;
+            padding: 10px;
+            margin: 0 auto;
+        }
+        .data-select {
+            text-align: center;
+            margin: 50px auto;
+        }
+        .data-select select {
+            width: 200px;
+        }
+
 
 
     </style>
@@ -81,16 +94,18 @@
         <p class="description">Use this tool to investigate the different stats of all 821 Pokemon.</p>
     </div>
     
-    <div>
-        <div class="y-buttons"></div>
-        <div class="canvas">
-            <div class="x-buttons"></div>
-        </div>
+    <div class="canvas"></div>
+
+    <div class="data-select">
+        <p class="">I want to compare a Pokemon's</p>
+        <select id="select-y-axis"></select>
+        <p class="">by it's</p>
+        <select id="select-x-axis"></select>
     </div>
+
 
     <div id="pokemon" class="pokemon-tooltip"></div>
 
-    
 
     <script type="text/javascript" src="./main.js"></script>
 </body>

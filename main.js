@@ -60,14 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
         'base_total', 'base_egg_steps', 'against_dragon', 'against_fairy', 'experience_growth'
     ]
 
-    let buttons = {
-        'x': d3.select('.x-buttons'),
-        'y': d3.select('.y-buttons'),
+    let dropdown = {
+        'x': document.getElementById('select-x-axis'),
+        'y': document.getElementById('select-y-axis')
     }
 
     stats.forEach(stat => {
-        buttons.x.append('button').text(stat).attr('value', stat).classed('x_sel', true)
-        buttons.y.append('button').text(stat).attr('value', stat).classed('y_sel', true)
+        dropdown.x.innerHTML += `<option value="${stat}">${stat}</option>`
+        dropdown.y.innerHTML += `<option value="${stat}">${stat}</option>`
     })
 
     ///////////////////////
@@ -229,9 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // D3 NEW X-AXIS
         ///////////////////////
 
-        d3.selectAll('.x_sel').on('click', function () {
-
-            axisFilter = this.value;
+        dropdown.x.addEventListener('change', e => {
+            axisFilter = dropdown.x.value
             let scales = makeScales(axisFilter, data)
 
             d3.select('.x-scale')
@@ -248,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             d3.selectAll('.circ')
                 .transition()
-                    .attr('fill', (d) => { return scales.c(d[axisFilter]) })
+                .attr('fill', (d) => { return scales.c(d[axisFilter]) })
             // d3.selectAll('.sprite')
             //     .transition()
             //     .attr('width', (d) => { return scales.r(d[axisFilter]) })
@@ -271,22 +270,22 @@ document.addEventListener('DOMContentLoaded', () => {
         // D3 NEW Y-AXIS
         ///////////////////////
 
-        d3.selectAll('.y_sel').on('click', function () {
+        dropdown.y.addEventListener('change', e => {
 
-            axisFilter = this.value;
+            axisFilter = dropdown.y.value
             let scales = makeScales(axisFilter, data)
 
             d3.select('.y-scale')
                 .transition()
                 .call(d3.axisLeft(scales.y))
-            
+
             d3.select('.y-axis-label')
                 .transition()
                 .text(axisFilter.toUpperCase())
 
             d3.selectAll('.circ')
                 .transition()
-                    .attr('fill', (d) => { return scales.c(d[axisFilter]) })
+                .attr('fill', (d) => { return scales.c(d[axisFilter]) })
 
             simulation.force('y', d3.forceY(function (d) {
                 return scales.y(d[axisFilter])
@@ -304,6 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 simulation.alphaDecay(0.1);
             }, 8000);
         })
+
     })
 
 
