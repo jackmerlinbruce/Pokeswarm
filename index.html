@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+    <title></title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style type="text/css">
+
+        @import url('https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap');
+
+        body {
+            margin: 0 auto;
+            background-color: floralwhite;
+            font-family: 'Roboto', sans-serif;
+        }
+        .header * {
+            margin: 0 auto;
+            padding: 0 auto;
+        }
+        .header {
+            margin: 40px auto;
+            text-align: center;
+        }
+
+
+        .x-buttons {
+            text-align: center;
+        }
+        .y-buttons * {
+            display: block;
+        }
+        .y-buttons {
+            float: left;
+        }
+        button {
+            padding: 10px;
+            margin: 3px;
+            width: 100px;
+            border: none;
+            border-radius: 50px;
+        }
+        button:hover {
+            background-color: rgb(158, 158, 158);
+        }
+        svg {
+            display: block;
+            margin: auto;
+        }
+
+        .circ {
+            fill-opacity: 0.0;
+            cursor: pointer;
+        }
+        .circ:hover {
+            fill: black;
+        }
+
+        .axis-label {
+            font-weight: 900;
+        }
+        .axis-label.x-axis-label {
+            text-anchor: middle;
+        }
+        .axis-label.y-axis-label {
+            transform: rotate(90 20, 40);
+        }
+        .pokemon-name {
+            font-weight: 900;
+            /* stroke: white;
+            stroke-width: 1px; */
+            /* text-anchor: middle; */
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1 class="title">Pokemon Stat Visualizer</h1>
+        <p class="description">Use this tool to investigate the different stats of all 821 Pokemon.</p>
+    </div>
+    
+    <div>
+        <div class="y-buttons"></div>
+        <div class="canvas">
+            <div class="x-buttons"></div>
+        </div>
+    </div>
+
+    <div id="pokemon" class="pokemon-tooltip"></div>
+
+    
+
+    <script type="text/javascript" src="./main.js"></script>
+</body>
+</html>
