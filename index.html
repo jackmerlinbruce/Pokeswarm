@@ -9,7 +9,7 @@
 
         body {
             margin: 0 auto;
-            background-color: floralwhite;
+            background-color: #faebd7;
             font-family: 'Roboto', sans-serif;
         }
         .header * {
@@ -21,33 +21,13 @@
             text-align: center;
         }
 
-
-        .x-buttons {
-            text-align: center;
-        }
-        .y-buttons * {
-            display: block;
-        }
-        .y-buttons {
-            float: left;
-        }
-        button {
-            padding: 10px;
-            margin: 3px;
-            width: 100px;
-            border: none;
-            border-radius: 50px;
-        }
-        button:hover {
-            background-color: rgb(158, 158, 158);
-        }
         svg {
             display: block;
             margin: auto;
+            margin-bottom: 200px;
         }
-
         .circ {
-            fill-opacity: 0.0;
+            fill-opacity: 0.6;
             cursor: pointer;
         }
         .circ:hover {
@@ -56,12 +36,17 @@
 
         .axis-label {
             font-weight: 900;
+            font-size: 150%;
+            opacity: 0.5;
         }
         .axis-label.x-axis-label {
             text-anchor: middle;
         }
         .axis-label.y-axis-label {
             transform: rotate(90 20, 40);
+        }
+        .tick {
+            stroke-opacity: 0.1
         }
         .pokemon-name {
             font-weight: 900;
@@ -77,13 +62,78 @@
         }
         .data-select {
             text-align: center;
-            margin: 50px auto;
+            margin: 25px auto;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-weight: 900;
+            background-color: #faebd7;
+            color: rgba(0, 0, 0, 0.5);
+            width: 690px;
+            border-radius: 50px;
+            box-shadow: 0px 0px 18px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            bottom: 20px;
+            transform: scale(0.8)
         }
         .data-select select {
-            width: 200px;
+            width: 150px;
+            border: none;
+            border-radius: 50px;
+            color: floralwhite;
+            font-weight: 900;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-indent: 1px;
+            text-overflow: '';
         }
+        .data-select select:hover {
+            box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .data-select select#select-x-axis {
+            background-color: rgba(255, 68, 0, 0.5);
+        }
+        .data-select select#select-y-axis {
+            background-color: rgba(0, 132, 255, 0.5);
+        }
+        .sprite-select {
+            text-align: center;
+            margin: 50px auto;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            width: 55px;
+            height: 35px;
+            background-color: floralwhite;
+            color: rgba(0, 0, 0, 0.5);
+            border-radius: 50px;
+            box-shadow: 0px 0px 18px 4px rgba(0, 0, 0, 0.1);
 
-
+            filter: grayscale(1)
+        }
+        .sprite-select:hover{
+            cursor: pointer;
+            box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.1);
+        }
+        .sprite-select .circle {
+            width: 15px;
+            height: 15px;
+            background-color: orangered;
+            border-radius: 10px;
+            margin: 0 auto;
+            transform: translateY(10px);
+        }
+                
+        .footer {
+            position: fixed;
+            background-color: antiquewhite;
+            left: 0;
+            top: 0;
+            width: 100%;
+            text-align: left;
+            padding-left: 20px;
+            opacity: 0.85;
+            width: 250px;
+        }
 
     </style>
 </head>
@@ -91,22 +141,40 @@
 
     <div class="header">
         <h1 class="title">Pokemon Stat Visualizer</h1>
-        <p class="description">Use this tool to investigate the different stats of all 821 Pokemon.</p>
+        <p class="description">Use this tool to compare and investigate the different stats of all 809 Pokemon.</p>
+        <p class="description">Each one of these Pokemon can be seen in the swarm below.</p>
     </div>
-    
+
     <div class="canvas"></div>
-
-    <div class="data-select">
-        <p class="">I want to compare a Pokemon's</p>
-        <select id="select-y-axis"></select>
-        <p class="">by it's</p>
-        <select id="select-x-axis"></select>
+    
+    <div class="hci data-select">
+        <p class="">I want to compare Pokemon</p>
+        <select id="select-x-axis">
+            <option value="disabled">(Nothing)</option>
+        </select>
+        <p class="">versus their</p>
+        <select id="select-y-axis">
+            <option value="disabled">(Nothing)</option>
+        </select>
+        <!-- <input type="range" min="-20" max="20" value="10" class="slider" id="collision-change"> -->
     </div>
 
+    <div class="footer">
+        <p>Created by u/jmerlinb (<a href="https://twitter.com/JackMerlinBruce" target="_blank">@JackMerlinBruce</a>)</p>
+        <p>Back to  <a href="https://artycharty.com" target="_blank">ArtyCharty</a></p>
+    </div>
+
+    <div class="hci sprite-select" hidden>
+        <div id="pokemon" class="pokemon-tooltip"></div>
+        <!-- <img src="https://img.pokemondb.net/sprites/sun-moon/icon/pikachu.png" alt="" srcset=""> -->
+    </div>
+    <div class="hci sprite-select" hidden>
+        <div class="circle"></div>
+    </div>
 
     <div id="pokemon" class="pokemon-tooltip"></div>
 
-
+    <div id="download"></div>
     <script type="text/javascript" src="./main.js"></script>
 </body>
 </html>
